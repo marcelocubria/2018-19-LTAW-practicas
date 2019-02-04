@@ -1,0 +1,11 @@
+body {
+  background-color: powderblue;
+}
+p {
+  color: red;
+}
+
+.titulo {
+  color: white;
+  text-align: center;
+}

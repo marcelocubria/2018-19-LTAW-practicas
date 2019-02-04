@@ -2,12 +2,15 @@ var http = require('http');
 var url = require('url');
 var fs = require('fs');
 
-console.log("Arrancando servidor...")
+console.log("Arrancando servidor...");
 
 
 http.createServer(function (req, res) {
-  var q = url.parse(req.url, true)
-  var peticion = "." + q.pathname
+  var q = url.parse(req.url, true);
+  var peticion = "." + q.pathname;
+  console.log(peticion);
+  var tipofichero = peticion.split(".")[tipofichero.length-1];
+  console.log(tipofichero);
   fs.readFile(peticion, function(err, data) {
     if (err) {
       res.writeHead(404, {'Content-Type': 'text/html'});
@@ -17,5 +20,5 @@ http.createServer(function (req, res) {
     res.write(data);
     return res.end();
   });
-  console.log("Peticion atendida")
+  console.log("Peticion atendida");
 }).listen(8080);
