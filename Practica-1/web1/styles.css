@@ -1,11 +1,23 @@
 body {
-  background-color: powderblue;
+  background-color:rgb(255, 255, 230);
 }
 p {
   color: red;
 }
 
-.titulo {
+h1 {
   color: white;
+}
+
+#divtitulo {
+  position: relative;
+  background-color: green;
+  height: 150px;
   text-align: center;
+}
+
+#divlogo{
+  position: absolute;
+  top: 25px;
+  left: 20px;
 }
