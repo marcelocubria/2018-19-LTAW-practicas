@@ -1,23 +1,46 @@
 body {
   background-color:rgb(255, 255, 230);
 }
-p {
-  color: red;
-}
 
 h1 {
   color: white;
 }
 
-#divtitulo {
-  position: relative;
+.cabecera {
   background-color: green;
-  height: 150px;
   text-align: center;
 }
 
-#divlogo{
-  position: absolute;
-  top: 25px;
-  left: 20px;
+.cabecera img{
+  height: 100px;
+  width: auto;
+}
+
+.cabecera .logo, .cabecera .titulo{
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.galeria{
+  margin: auto;
+  margin-top: 5px;
+  border: 3px solid black;
+  width: 50%;
+  text-align: center;
+}
+
+div.imagen {
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 33%;
+}
+
+div.imagen:hover {
+  border: 1px solid #777;
+}
+
+div.imagen img {
+  width: 100%;
+  height: auto;
 }
