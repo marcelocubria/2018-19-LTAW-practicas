@@ -10,6 +10,14 @@ def mi_producto(request, param):
     html = "acceso al producto: %i" % numero;
     return HttpResponse(html)
 
+def principal(request):
+    html = open('mi_tienda/pagina1.html')
+    return HttpResponse(html)
+
+def damecss(request):
+    html = open('mi_tienda/styles.css')
+    return HttpResponse(html)
+
 PLANTILLA = """
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
