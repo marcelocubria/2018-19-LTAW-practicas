@@ -25,6 +25,8 @@ from django.template import Template, Context
 def index(request):
     return render(request, 'main.html', {'user':'Obijuan'})
 
+def re(request):
+    return render(request, 'pagina2.html', {'titulo':'Resident Evil 2 Remake', 'portada':'/static/templates/images/re2.png'})
 
 PLANTILLA = """
 <!DOCTYPE html>

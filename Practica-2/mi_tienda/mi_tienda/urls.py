@@ -14,13 +14,14 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 import mi_tienda.views as mt
 
 urlpatterns = [
-    url(r'^styles.css', mt.damecss),
     url(r'^main/', mt.index),
-    url(r'^saludo', mt.saludo),
+    url(r'^re', mt.re),
     url(r'^producto/(\d{1,2})/$', mt.mi_producto),
     url(r'hola/', mt.mi_funcion),
     url(r'^test/', include(admin.site.urls)),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
