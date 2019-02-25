@@ -18,7 +18,7 @@ import mi_tienda.views as mt
 
 urlpatterns = [
     url(r'^styles.css', mt.damecss),
-    url(r'^main', mt.principal),
+    url(r'^main/', mt.index),
     url(r'^saludo', mt.saludo),
     url(r'^producto/(\d{1,2})/$', mt.mi_producto),
     url(r'hola/', mt.mi_funcion),

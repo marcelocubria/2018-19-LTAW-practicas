@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import Template, Context
+from django.shortcuts import render
 
 def mi_funcion(request):
     html = "Hola que tal"
@@ -17,6 +18,13 @@ def principal(request):
 def damecss(request):
     html = open('mi_tienda/styles.css')
     return HttpResponse(html)
+
+from django.http import HttpResponse
+from django.template import Template, Context
+
+def index(request):
+    return render(request, 'main.html', {'user':'Obijuan'})
+
 
 PLANTILLA = """
 <!DOCTYPE html>
