@@ -19,9 +19,6 @@ from django.conf.urls.static import static
 import mi_tienda.views as mt
 
 urlpatterns = [
-    url(r'^main/', mt.index),
-    url(r'^re', mt.re),
-    url(r'^producto/(\d{1,2})/$', mt.mi_producto),
-    url(r'hola/', mt.mi_funcion),
     url(r'^test/', include(admin.site.urls)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    url(r'', include('tienda_app.urls')),
+]
