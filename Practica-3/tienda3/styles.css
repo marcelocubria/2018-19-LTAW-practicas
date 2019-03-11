@@ -1,0 +1,91 @@
+body {
+  background-color:rgb(255, 255, 230);
+}
+
+h1 {
+  color: white;
+}
+
+
+
+.cabecera {
+  background-color: #4CAF50;
+  text-align: center;
+}
+
+.cabecera img{
+  height: 50px;
+  width: auto;
+}
+
+div.logo {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+}
+
+.cabecera .logo, .cabecera .titulo{
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.galeria{
+  margin: auto;
+  margin-top: 5px;
+  border: 3px solid black;
+  width: 66%;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15% ;
+  background-color: #f1f1f1;
+  border: 1px solid #555;
+  position: fixed;
+  margin-top: 20px;
+}
+
+li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+li {
+  text-align: center;
+  border-bottom: 1px solid #555;
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+div.imagen {
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 33%;
+}
+
+div.imagen:hover {
+  border: 1px solid #777;
+}
+
+div.imagen img {
+  width: 100%;
+  height: auto;
+}
