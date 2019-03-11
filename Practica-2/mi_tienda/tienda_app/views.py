@@ -10,3 +10,6 @@ def home(request):
 
 def pagina1(request):
     return render(request, 'pagina1.html', {})
+
+def producto(request):
+    return render(request, 'producto.html', {})
