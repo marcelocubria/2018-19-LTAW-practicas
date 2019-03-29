@@ -20,6 +20,7 @@ function main() {
 
     //-- Enviar el mensaje, con el evento "new_message"
     socket.emit('new_message', msg.value);
+    document.getElementById("msg").value = '';
 
     //-- Lo notificamos en la consola del navegador
     console.log("Mensaje emitido")
@@ -29,7 +30,23 @@ function main() {
   //-- en el párrafo
   socket.on('new_message', msg => {
     console.log("me llega un mensaje")
-    display.innerHTML = msg;
+    para = document.createElement("p");
+    para.innerHTML = msg;
+
+    display = document.getElementById("display");
+    child = display.firstChild;
+    display.insertBefore(para,child);
+    //display.innerHTML = msg + '</br>' + display.innerHTML;
+  });
+
+  socket.on('server_message', msg => {
+    para = document.createElement("p");
+    para.innerHTML = msg;
+    para.className = "res_comando";
+
+    display = document.getElementById("display");
+    child = display.firstChild;
+    display.insertBefore(para,child);
   });
 
 }
