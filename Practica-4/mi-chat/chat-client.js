@@ -14,12 +14,13 @@ function main() {
 
   //-- Caja con el mensaje a enviar
   var msg = document.getElementById("msg")
+  var nombre = document.getElementById("nombre")
 
   //-- Cuando se aprieta el botón de enviar...
   send.onclick = () => {
 
     //-- Enviar el mensaje, con el evento "new_message"
-    socket.emit('new_message', msg.value);
+    socket.emit('new_message', nombre.value + ': ' + msg.value);
     document.getElementById("msg").value = '';
 
     //-- Lo notificamos en la consola del navegador

@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var usuarios = [];
 
 //--Servir la pagina principal
 app.get('/', function(req, res){
@@ -29,7 +30,8 @@ http.listen(3000, function(){
 io.on('connection', function(socket){
   console.log('--> Usuario conectado!');
   socket.broadcast.emit('server_message', 'Se ha conectado un nuevo usuario!');
-  socket.emit("server_message", 'Bienvenido')
+  socket.emit("server_message", 'Bienvenido');
+  usuarios.push(socket.id);
   //-- Detectar si el usuario se ha desconectado
   socket.on('disconnect', function(){
     console.log('--> Usuario Desconectado');
@@ -42,25 +44,19 @@ io.on('connection', function(socket){
      //-- Notificarlo en la consola del servidor
      console.log("Mensaje recibido: " + msg)
 
-     if (msg == '/help') {
+     if (msg.slice(-5) == '/help') {
        respuesta = "Lista de comandos: <br> /help: muestra esta lista de comandos"
        respuesta += "<br> /list: muestra la lista de usuarios activos <br>"
        respuesta += "/hello: el servidor te saluda <br> /date: fecha actual"
        socket.emit("server_message", respuesta)
-     } else if (msg == '/list') {
-       socket.emit("server_message", 'prueba')
-     } else if (msg == '/hello') {
+     } else if (msg.slice(-5) == '/list') {
+       socket.emit("server_message", usuarios)
+     } else if (msg.slice(-6) == '/hello') {
        socket.emit("server_message", 'Buenos días, usuario')
-     } else if (msg == '/date') {
-       socket.emit("server_message", 'La hora actual es' + new Date())
+     } else if (msg.slice(-5) == '/date') {
+       socket.emit("server_message", 'La hora actual es ' + new Date())
      } else {
-       io.emit('new_message', socket.id + ": " + msg);
+       io.emit('new_message', msg);
      }
    });
 });
-
-custom_id = 1;
-
-io.engine.generateId = (req) => {
-  return "User" + custom_id++; // custom id must be unique
-}
