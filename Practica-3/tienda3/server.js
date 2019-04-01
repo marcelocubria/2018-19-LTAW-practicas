@@ -23,50 +23,52 @@ http.createServer((req, res) => {
 
     case "html":
 
-      if (q.pathname == "/login" && req.method === 'POST') {
+      var cookie = req.headers.cookie;
+      console.log("Cookie: " + cookie);
+
+      if (q.pathname == "/" && req.method === 'POST') {
+
+        content = '';
 
         req.on('data', chunk => {
             //-- Leer los datos (convertir el buffer a cadena)
             data = chunk.toString();
-
+            content += data;
             //-- Mostrar los datos en la consola del servidor
             console.log("Datos recibidos: " + data)
             res.statusCode = 200;
          });
-         
+
          req.on('end', ()=> {
-           //-- Generar el mensaje de respuesta
-           res.setHeader('Content-Type', 'text/html')
-           res.write(content);
-           res.end();
-         })
-         return
-     } else {
-
-        var cookie = req.headers.cookie;
-        console.log("Cookie: " + cookie);
-
-        fs.readFile(peticion, function(err, data) {
-        if (err) {
-          res.writeHead(404, {'Content-Type': 'text/html'});
-          return res.end("404 Not Found, Fichero no encontrado");
-        }
-
-        htmlstring = data.toString();
-        //manejo cookie
-        if (!cookie) {
-          htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, usuario no registrado")
-        } else {
-          htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, " + cookie);
-        }
-        console.log(htmlstring2);
-
-        mime = "text/html";
-        res.writeHead(200, {'Content-Type': mime});
-        res.write(data);
-        return res.end();
-        });
+           res.setHeader('Set-Cookie', content);
+           cookie = content;
+         });
       }
+
+      fs.readFile(peticion, function(err, data) {
+      if (err) {
+        res.writeHead(404, {'Content-Type': 'text/html'});
+        return res.end("404 Not Found, Fichero no encontrado");
+      }
+      htmlstring = data.toString();
+      //manejo cookie
+      if (!cookie) {
+        htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, usuario no registrado")
+      } else {
+        indexuser = cookie.lastIndexOf('Nombre=');
+        indexcarro = cookie.lastIndexOf('Carro=');
+        usuario = cookie.slice(indexuser+7);
+        htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, " + usuario);
+      }
+      if (q.pathname == '/carrito') {
+
+      }
+
+      mime = "text/html";
+      res.writeHead(200, {'Content-Type': mime});
+      res.write(htmlstring2);
+      return res.end();
+      });
     break;
 
     case "jpg":
