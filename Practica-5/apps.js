@@ -1,18 +1,53 @@
-function main()
-{
-  console.log("Estoy en app.js...")
+const io = require('socket.io-client');
+const socket = io('http://localhost:3000');
 
-  //-- Obtener los elementos del interfaz, del DOM
-  let button = document.getElementById('button')
-  let display = document.getElementById('display')
+function main() {
+  console.log("Hola!!!!-------------")
 
-  //-- Cuando se aprieta el botón...
-  button.onclick = () => {
+  //-- Obtener los elementos de interfaz:
 
-    //-- Sacar un mensaje en la consola
-    console.log("click!")
+  //-- Boton de envio de mensaje
+  var send = document.getElementById('send')
 
-    //-- Añadir la cadena al párrafo
-    display.innerHTML += "holi "
+  //-- Parrafo para mostrar mensajes recibidos
+  var display = document.getElementById('display')
+
+  //-- Caja con el mensaje a enviar
+  var msg = document.getElementById("msg")
+  var nombre = document.getElementById("nombre")
+
+  //-- Cuando se aprieta el botón de enviar...
+  send.onclick = () => {
+
+    //-- Enviar el mensaje, con el evento "new_message"
+    socket.emit('new_message', nombre.value + ': ' + msg.value);
+    document.getElementById("msg").value = '';
+
+    //-- Lo notificamos en la consola del navegador
+    console.log("Mensaje emitido")
   }
+
+  //-- Cuando se reciba un mensaje del servidor se muestra
+  //-- en el párrafo
+  socket.on('new_message', msg => {
+    console.log("me llega un mensaje")
+    para = document.createElement("p");
+    para.innerHTML = msg;
+
+    display = document.getElementById("display");
+    child = display.firstChild;
+    display.insertBefore(para,child);
+    //display.innerHTML = msg + '</br>' + display.innerHTML;
+  });
+
+  socket.on('server_message', msg => {
+    para = document.createElement("p");
+    para.innerHTML = msg;
+    para.className = "res_comando";
+
+    display = document.getElementById("display");
+    child = display.firstChild;
+    display.insertBefore(para,child);
+  });
+
 }

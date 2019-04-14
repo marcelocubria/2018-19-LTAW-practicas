@@ -4,5 +4,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^4.1.4",
+    "socket.io-client": "^2.2.0"
   }
 }

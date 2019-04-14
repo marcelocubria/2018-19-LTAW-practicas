@@ -1,15 +1,19 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>TEST!</title>
-    <link rel="stylesheet" href="mycss.css">
+    <title>MI CHAT</title>
     <script src="apps.js"></script>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body onload="main();">
-    <h3>MI PRIMERA APP EN ELECTRON!!!</h3>
-    <br>
-    <button type="button" id="button">Click</button>
-    <p id="display"> </p>
+    <div>
+      Escribe tu nombre
+      <input id="nombre" autocomplete="off" />
+    </div>
+    <p>Escribe un mensaje</p>
+    <input id="msg" autocomplete="off" />
+    <button type="button" id="send">SEND</button>
+    <div id="display"></div>
   </body>
 </html>
