@@ -41,7 +41,7 @@ http.createServer((req, res) => {
 
          req.on('end', ()=> {
            res.setHeader('Set-Cookie', content);
-           cookie = content;
+           cookie += content + ";";
          });
       }
 
@@ -56,12 +56,24 @@ http.createServer((req, res) => {
         htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, usuario no registrado")
       } else {
         indexuser = cookie.lastIndexOf('Nombre=');
+        finaluser = cookie.indexOf(';', indexuser);
         indexcarro = cookie.lastIndexOf('Carro=');
-        usuario = cookie.slice(indexuser+7);
+        usuario = cookie.slice(indexuser+7, finaluser);
         htmlstring2 = htmlstring.replace("Bienvenido,", "Bienvenido, " + usuario);
       }
-      if (q.pathname == '/carrito') {
-
+      if (q.pathname == '/carrito.html') {
+        if (cookie.indexOf('re2') != -1) {
+          htmlstring2 = htmlstring2.replace("<!-- 1", '');
+          htmlstring2 = htmlstring2.replace("1 -->", '');
+        }
+        if (cookie.indexOf('me') != -1) {
+          htmlstring2 = htmlstring2.replace("<!-- 2", '');
+          htmlstring2 = htmlstring2.replace("2 -->", '');
+        }
+        if (cookie.indexOf('anthem') != -1) {
+          htmlstring2 = htmlstring2.replace("<!-- 3", '');
+          htmlstring2 = htmlstring2.replace("3 -->", '');
+        }
       }
 
       mime = "text/html";
