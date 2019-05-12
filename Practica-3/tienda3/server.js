@@ -43,6 +43,22 @@ http.createServer((req, res) => {
            res.setHeader('Set-Cookie', content);
            cookie += content + ";";
          });
+      } else if (q.pathname == "/comprar.html" && req.method === 'POST') {
+        content = '';
+
+        req.on('data', chunk => {
+            //-- Leer los datos (convertir el buffer a cadena)
+            data = chunk.toString();
+            content += data;
+            //-- Mostrar los datos en la consola del servidor
+            console.log("Datos recibidos: " + data)
+            res.statusCode = 200;
+         });
+
+         req.on('end', ()=> {
+           datos += content;
+           console.log(datos);
+         });
       }
 
       fs.readFile(peticion, function(err, data) {
