@@ -2,9 +2,8 @@ function main()
 {
 
   var buscar = document.getElementById('buscar')
-  var res_buscar = document.getElementById('res_buscar');
-
-  buscar.onkeypress = ()=>{
+  var resultado = document.getElementById('res_buscar');
+  buscar.onkeyup = ()=>{
 
     //-- Crear objeto para hacer peticiones AJAX
     m = new XMLHttpRequest();

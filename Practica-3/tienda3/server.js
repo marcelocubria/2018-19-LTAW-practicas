@@ -141,17 +141,18 @@ http.createServer((req, res) => {
   }
 
   if (q.pathname == "/busqueda") {
-    content = {};
+    content = '{"productos": [';
     var params = q.query;
-    prueba = "Metro Exodus";
-    console.log("params texto es " + params.texto);
-    if (prueba.search(params.texto) != 1) {
-      content = `
-      {
-        "productos": ["Metro Exodus"]
+    prueba = ["Metro Exodus", "Resident Evil", "Anthem"]
+    if (params.texto.length >= 3) {
+      for (var i=0; i < prueba.length; i++) {
+        if (prueba[i].search(params.texto) != -1) {
+          content += '"' + prueba[i] + '"';
+        }
       }
-      `
     }
+    content += "]}"
+    console.log(content);
     res.setHeader('Content-Type', 'application/json')
     res.write(content);
     return res.end();
