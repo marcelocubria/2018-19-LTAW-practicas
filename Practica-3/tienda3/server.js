@@ -44,6 +44,8 @@ http.createServer((req, res) => {
            cookie += content + ";";
          });
       } else if (q.pathname == "/comprar.html" && req.method === 'POST') {
+        console.log("entro aqui")
+        datos = '';
         content = '';
 
         req.on('data', chunk => {
@@ -91,6 +93,14 @@ http.createServer((req, res) => {
           htmlstring2 = htmlstring2.replace("3 -->", '');
         }
       }
+      if (q.pathname == '/comprar.html') {
+        if (typeof datos == "undefined") {
+          console.log("no datos")
+          datos = '';
+        }
+        htmlstring2 = htmlstring2.replace('<b id="resultado">', '<b id="resultado">' + datos);
+        htmlstring2 = htmlstring2.replace(/&/g, '<br>');
+      }
 
       mime = "text/html";
       res.writeHead(200, {'Content-Type': mime});
@@ -118,6 +128,33 @@ http.createServer((req, res) => {
         return res.end();
       });
     break;
+
+    case "js":
+      fs.readFile(peticion, function(err, data) {
+        //-- Generar el mensaje de respuesta
+        res.writeHead(200, {'Content-Type': 'application/javascript'});
+        res.write(data);
+        return res.end();
+      });
+    break;
+
+  }
+
+  if (q.pathname == "/busqueda") {
+    content = {};
+    var params = q.query;
+    prueba = "Metro Exodus";
+    console.log("params texto es " + params.texto);
+    if (prueba.search(params.texto) != 1) {
+      content = `
+      {
+        "productos": ["Metro Exodus"]
+      }
+      `
+    }
+    res.setHeader('Content-Type', 'application/json')
+    res.write(content);
+    return res.end();
   }
 
   console.log("Peticion atendida");

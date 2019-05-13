@@ -26,7 +26,7 @@
     </div>
 
     <div class="pago">
-      <form action="/comprar.html">
+      <form action="/comprar.html" method="post">
         Nombre: <input type="text" name="nombre" value="">
         <br>
         Apellidos: <input type="text" name="apellidos" value="">
@@ -39,6 +39,8 @@
         <input type="radio" name="pago" value="transferencia"> Transferencia
         <br>
         <input type="submit" value="Comprar">
+        <br>
+        <b id="resultado"></b>
       </form>
     </div>
   </body>
