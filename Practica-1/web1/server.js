@@ -28,6 +28,8 @@ http.createServer(function (req, res) {
       mime = "image/" + tipofichero;
     } else if (tipofichero == "css") {
       mime = "text/css";
+    } else if (tipofichero == "mp4") {
+      mime = "video/mp4";
     }
     res.writeHead(200, {'Content-Type': mime});
     res.write(data);
