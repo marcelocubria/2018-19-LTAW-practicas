@@ -30,6 +30,8 @@ http.createServer(function (req, res) {
       mime = "text/css";
     } else if (tipofichero == "mp4") {
       mime = "video/mp4";
+    } else if (tipofichero == "mp3") {
+      mime = "audio/mpeg";
     }
     res.writeHead(200, {'Content-Type': mime});
     res.write(data);
